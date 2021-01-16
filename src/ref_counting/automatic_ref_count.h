@@ -1,3 +1,4 @@
+#include <stdlib.h>
 
 #ifndef AUTOMATIC_REF_COUNT
 #define AUTOMATIC_REF_COUNT
