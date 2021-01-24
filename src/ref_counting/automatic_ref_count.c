@@ -3,7 +3,7 @@
 
 // instead of using a simple lock, we can use a dictionary to store the lock per each object (or the control block to sync retain/release calls) [void*: pthread_mutex_t]
 // init the dictionary when allocate is first called, then each time there is a new object create a new entry and pass it to it :D
-static int *lock = NULL;
+// static int *lock = NULL;
 
 void *allocate(size_t bytes_count) 
 {
@@ -11,10 +11,10 @@ void *allocate(size_t bytes_count)
     uint8_t *reference_count = (uint8_t *)allocated_block;
     *reference_count = 1;
 
-    if (lock == NULL)
-    {
-        lock = (int *) malloc(sizeof(int));
-    }
+    // if (lock == NULL)
+    // {
+    //     lock = (int *) malloc(sizeof(int));
+    // }
 
     return (void*)((char *)allocated_block + 1);
 }
