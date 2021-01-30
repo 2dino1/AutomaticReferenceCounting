@@ -69,6 +69,28 @@ void insert_value(dictionary_t *dictionary, void *key, const pthread_mutex_t val
     previous_entry->next = new_entry;
 }
 
+pthread_mutex_t *get_value(dictionary_t *dictionary, void *key)
+{
+   for (size_t i = 0; i < DICTIONARY_SIZE; i++)
+    {
+        if (dictionary->entries[i] != NULL)
+        {
+            
+            entry_t *entry = dictionary->entries[i];
+            while (entry != NULL)
+            {
+                if (entry->key == (unsigned long) key)
+                {
+                    return &(entry->value);
+                }
+                entry = entry-> next;
+            }
+        }
+    }  
+
+    return NULL;
+}
+
 void delete_value(dictionary_t *dictionary, void *key)
 {
     uint8_t hash = calculate_hash(key);
@@ -149,4 +171,25 @@ static void release_entry(entry_t *entry)
     pthread_mutex_destroy(&entry->value);
     entry->next = NULL;
     free(entry);
+}
+
+// this function is going to be used just for pretty printing
+// the format of the print will be [key-value]
+void pretty_print(dictionary_t *dictionary)
+{
+    for (size_t i = 0; i < DICTIONARY_SIZE; i++)
+    {
+        if (dictionary->entries[i] != NULL)
+        {
+            printf("Dictionary index is %ld: \n", i);
+            entry_t *entry = dictionary->entries[i];
+            while (entry != NULL)
+            {
+                printf("Key is: %ld \n", entry->key);
+                printf("Value is: %p \n", &entry->value);
+                entry = entry-> next;
+            }
+            printf("\n");
+        }
+    }
 }

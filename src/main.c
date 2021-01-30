@@ -5,12 +5,8 @@
 
 int main(void)
 {
-    int *element = allocate(sizeof(int));
-    retain(element);
-    int *element1 = allocate(sizeof(int));
-    pthread_mutex_t mutex;
-    pthread_mutex_init(&mutex, NULL);
-    insert_value(NULL, element, mutex);
-    insert_value(NULL, element1, mutex);
-    printf("Element pointer is %p \n", element);
+    void *intAddr0 = allocate(sizeof(int));
+    retain(intAddr0);
+    // release(intAddr0);
+    // release(intAddr0);
 }
