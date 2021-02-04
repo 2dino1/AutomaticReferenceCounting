@@ -1,6 +1,6 @@
 # AutomaticReferenceCounting
 
-This project is a representation of a automatic ref counting system, that uses a very similar idea to what malloc/free do in C language. 
+This project is a representation of an automatic ref counting system, that uses a very similar idea to what malloc/free do in C language. 
 The idea behind it is when allocating a chunck of memory on the heap, in the sizeof parameter of the malloc, ask for additional 1 byte size and use it to store the retain count there.
 
 ## Installation
